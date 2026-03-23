@@ -28,15 +28,21 @@ import 'cypress-real-events'
 import './actions/consultancy.actions'
 import { getTodayDate } from './utils'
 
-Cypress.Commands.add('start', ()=> {
+Cypress.Commands.add('start', () => {
 
 
     cy.visit('/')
 
 })
 
+Cypress.Commands.add('goToSignup', () => {
+    cy.start()
+    cy.get('a[href="/register"]').click()
+    cy.contains('h2', 'Crie sua conta')
+        .should('be.visible')
+})
 
-Cypress.Commands.add('submitLoginForm', (email, senha)=> {
+Cypress.Commands.add('submitLoginForm', (email, senha) => {
 
     cy.get('#email').type(email)
     cy.get('#password').type(senha)
@@ -57,9 +63,9 @@ Cypress.Commands.add('goTo', (buttonName, pageTitle) => {
 
 
 //HelpersS
-Cypress.Commands.add('login', ()=> {
-       cy.start()
-       cy.submitLoginForm('papito@webdojo.com', 'katana123')
+Cypress.Commands.add('login', () => {
+    cy.start()
+    cy.submitLoginForm('papito@webdojo.com', 'katana123')
 
     // const token = 'e1033d63a53fe66c0fd3451c7fd8f617'
     // const loginDate = getTodayDate()
